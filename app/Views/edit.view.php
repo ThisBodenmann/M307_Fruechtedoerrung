@@ -10,7 +10,7 @@
 <body>
     <div class="container">
     
-        <h1>Neuer Auftrag erfassen</h1>
+        <h1>Auftrag anpassen</h1>
 
         <form>
 
@@ -89,10 +89,20 @@
                 </select>
                 <br>
                 <br>
+                
+            </fieldset>
+
+            <fieldset>
+
+                <legend>Infos</legend>
+
+                <label for="creationDate">Erstellungsdatum: </label>
+                <input name="creationDate" id="creationDate" readonly>
+                <br>
+                <br>
 
                 <label for="time">Geschätzte Dörrungszeit: </label>
                 <input type="text" id="time" name="time" readonly>
-
             </fieldset>
 
         </form>

@@ -2,7 +2,8 @@
 require 'core/bootstrap.php';
 
 $routes = [
-	'/create' => 'CreateController@index'
+	'/create' => 'CreateController@index',
+	'/edit' => 'EditController@index'
 ];
 
 $db = [
