@@ -7,9 +7,11 @@ CREATE TABLE `auftrag` (
   `name` varchar(120) NOT NULL,
   `phone` varchar(50) NOT NULL,
   `email` varchar(80) NOT NULL,
-  `auftragDate` smalldatetime DEFAULT GETDATE() NOT NULL,
-  `returndate` smalldatetime NOT NULL,
-  `fk_fruitId` int(11) FOREIGN KEY REFERENCES fruit(id) NOT NULL
+  `auftragDate` date DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `returndate` date NOT NULL,
+  `fk_fruitId` int(11) FOREIGN KEY REFERENCES fruit(id) NOT NULL,
+  PRIMARY KEY(auftragId),
+  CONSTRAINT fk_fruitId FOREIGN KEY (fk_fruitId) REFERENCES fruits(id)
 );
 
 INSERT INTO `auftrag` (`name`, `phone`, `email`, `returndate`, `fk_fruitId`) VALUES
