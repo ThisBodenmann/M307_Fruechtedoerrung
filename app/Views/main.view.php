@@ -8,7 +8,8 @@
     <script src="public/js/app.js"></script>
 </head>
 <body>
-    <form action="home" method="POST">
+
+        <button class="btnCreate" type="button" onclick="window.location.href='/M307_Fruechtedoerrung/create'">Neuen Auftrag erstellen</button>
         <table class="styled-table">
             <thead>
                 <tr>
@@ -18,6 +19,7 @@
                     <th>Email</th>
                     <th>Menge</th>
                     <th>Bearbeiten</th>
+                    <th>Löschen</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,10 +39,17 @@
                                     </button>
                                 </a>
                             </td>
+                            <td>
+                                <a href="delete?taskId=<?= $task->$auftragId ?>">
+                                    <button id="btnDelete" type="button">
+                                        <img class="btnDelete" id="deleteImg" src="public/icons/delete.png" alt="Delete">
+                                    </button>
+                                </a>
+                            </td>
                         </tr>
                     <?php } ?>
             </tbody>
         </table>
-    </form>
+
 </body>
 </html>
