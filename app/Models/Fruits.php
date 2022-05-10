@@ -21,4 +21,13 @@ class Fruits
 
         return Fruits::ResultToFruits($results);
     }
+
+    private static function ResultToFruits($dbr)
+    {   
+        return new Tasks(
+            $dbr['id'],
+            $dbr['name'],
+        );
+    }
+}
 ?>

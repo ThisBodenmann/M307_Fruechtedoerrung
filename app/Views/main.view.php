@@ -18,6 +18,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Menge</th>
+                    <th>Frucht</th>
                     <th>Bearbeiten</th>
                     <th>Löschen</th>
                 </tr>
@@ -32,9 +33,7 @@
                             <td><?= $task->name ?></td>
                             <td><?= $task->email ?></td>
                             <td><?= $task->quantity ?></td>
-                            <td><?= $task->quantity ?></td>
                             <td><?= $task->fruit->name ?></td>
-
                             <td>
                                 <a href="edit?taskId=<?= $task->auftragId ?>">
                                     <button id="btnEdit" type="button">
