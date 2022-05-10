@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Meine Seite</title>
@@ -81,7 +82,7 @@
                 <br>
 
                 <label>Menge: </label>
-                <select name="weight">
+                <select name="weight" id="weight">
                     <option value="0to5">'0-5 kg'</option>
                     <option value="5to10">'5-10 kg'</option>
                     <option value="10to15">'10-15 kg'</option>
@@ -91,8 +92,8 @@
                 <br>
 
                 <label for="time">Geschätzte Dörrungszeit: </label>
-                <input type="text" id="time" name="time" readonly>
-
+                <input type="text" id="time" name="time" default="nice" readonly>
+                
             </fieldset>
 
         </form>
