@@ -32,15 +32,18 @@
                             <td><?= $task->name ?></td>
                             <td><?= $task->email ?></td>
                             <td><?= $task->quantity ?></td>
+                            <td><?= $task->quantity ?></td>
+                            <td><?= $task->fruit->name ?></td>
+
                             <td>
-                                <a href="update?taskId=<?= $task->$auftragId ?>">
+                                <a href="edit?taskId=<?= $task->auftragId ?>">
                                     <button id="btnEdit" type="button">
                                         <img class="editbtn" id="editImg" src="public/icons/edit.png" alt="Edit">
                                     </button>
                                 </a>
                             </td>
                             <td>
-                                <a href="delete?taskId=<?= $task->$auftragId ?>">
+                                <a href="delete?taskId=<?= $task->auftragId ?>">
                                     <button id="btnDelete" type="button">
                                         <img class="btnDelete" id="deleteImg" src="public/icons/delete.png" alt="Delete">
                                     </button>
