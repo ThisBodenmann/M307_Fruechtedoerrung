@@ -4,8 +4,8 @@ class MainController
 {
 	public function index()
 	{
-		require 'app/Views/main.view.php';
 		$tasks = Tasks::getAll();
+		require 'app/Views/main.view.php';
 
 	}
 
