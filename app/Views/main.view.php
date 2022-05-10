@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Meine Seite</title>
