@@ -1,7 +1,7 @@
 <?php
 class Tasks
 {
-    public $auftragId;
+    public $orderId;
     public $fruit;
     public $name;
     public $phone;
@@ -11,7 +11,7 @@ class Tasks
     public $returnDate;
     public $completed;
 
-    public function __construct($fruit = null, $name = null, $phone = null, $email = null, $quantity = null, $orderDate = null, $returnDate = null)
+    public function __construct($fruit = null, $name = null, $phone = null, $email = null, $quantity = null, $orderDate = null, $returnDate = null, $completed = null)
     {
         $this->fruit = $fruit;
         $this->name = $name;
@@ -25,9 +25,9 @@ class Tasks
         return $this;
     }
 
-    public function find(int $id): ?self
+    public function find(int $id)
     {
-        $statement = db()->prepare('SELECT * FROM example WHERE id = :id LIMIT 1');
+        $statement = db()->prepare('SELECT name FROM fruits WHERE id = :id LIMIT 1');
         $statement->bindParam(':id', $id);
         $statement->execute();
         $result = $statement->fetch();
@@ -70,6 +70,7 @@ class Tasks
             $dbr['orderDate'],
             $dbr['returnDate'],
             $dbr['completed'],
+            Fruits::find($dbr['fk_fruitId']),
         );
     }
     /**

@@ -2,6 +2,7 @@
 define ('ROOT_URL', $_SERVER["REQUEST_SCHEME"] . '://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['SCRIPT_NAME']));
 
 require 'app/Models/Tasks.php';
+require 'app/Models/Fruits.php';    
 
 require 'core/database.php';
 require 'core/helpers.php';
