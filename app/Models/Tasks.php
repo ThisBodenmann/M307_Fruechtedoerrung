@@ -1,7 +1,6 @@
 <?php
 class Tasks
 {
-    public $orderId;
     public $name;
     public $phone;
     public $email;
@@ -14,7 +13,6 @@ class Tasks
 
     public function __construct($name = null, $phone = null, $email = null, $quantity = null, $orderDate = null, $returnDate = null, $completed = null, $fruit = null)
     {
-        $this->fruit = $fruit;
         $this->name = $name;
         $this->phone = $phone;
         $this->email = $email;
@@ -22,6 +20,7 @@ class Tasks
         $this->orderDate = $orderDate; 
         $this->returnDate = $returnDate;
         $this->completed = $completed;
+        $this->fruit = $fruit;
 
         return $this;
     }
@@ -63,9 +62,9 @@ class Tasks
     private static function ResultToTask($dbr)
     {   
         return new Tasks(
-            $dbr['orderId'],
             $dbr['name'],
             $dbr['phone'],
+            $dbr['email'],
             $dbr['quantity'],
             $dbr['orderDate'],
             $dbr['returnDate'],
