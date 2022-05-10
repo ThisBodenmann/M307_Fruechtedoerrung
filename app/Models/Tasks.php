@@ -2,7 +2,6 @@
 class Tasks
 {
     public $orderId;
-    public $fruit;
     public $name;
     public $phone;
     public $email;
@@ -10,15 +9,17 @@ class Tasks
     public $orderDate;
     public $returnDate;
     public $completed;
+    public $fruit;
 
-    public function __construct($fruit = null, $name = null, $phone = null, $email = null, $quantity = null, $orderDate = null, $returnDate = null, $completed = null)
+
+    public function __construct($name = null, $phone = null, $email = null, $quantity = null, $orderDate = null, $returnDate = null, $completed = null, $fruit = null)
     {
         $this->fruit = $fruit;
         $this->name = $name;
         $this->phone = $phone;
         $this->email = $email;
         $this->quantity = $quantity;
-        $this->orderDate = $orderDate;
+        $this->orderDate = $orderDate; 
         $this->returnDate = $returnDate;
         $this->completed = $completed;
 
@@ -62,15 +63,14 @@ class Tasks
     private static function ResultToTask($dbr)
     {   
         return new Tasks(
-            $dbr['auftragId'],
+            $dbr['orderId'],
             $dbr['name'],
             $dbr['phone'],
-            $dbr['fruit'],
             $dbr['quantity'],
             $dbr['orderDate'],
             $dbr['returnDate'],
             $dbr['completed'],
-            Fruits::find($dbr['fk_fruitId']),
+            Fruits::getFruitById($dbr['fk_fruitId']),
         );
     }
     /**
