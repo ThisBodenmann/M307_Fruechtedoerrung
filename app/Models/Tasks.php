@@ -6,19 +6,18 @@ class Tasks
     public $name;
     public $phone;
     public $email;
-    public $weight;
+    public $quantity;
     public $orderDate;
     public $returnDate;
-    public $quantity;
     public $completed;
 
-    public function __construct($fruit = null, $name = null, $phone = null, $email = null, $weight = null,$orderDate = null,$returnDate = null)
+    public function __construct($fruit = null, $name = null, $phone = null, $email = null, $quantity = null, $orderDate = null, $returnDate = null)
     {
         $this->fruit = $fruit;
         $this->name = $name;
         $this->phone = $phone;
         $this->email = $email;
-        $this->weight = $weight;
+        $this->quantity = $quantity;
         $this->orderDate = $orderDate;
         $this->returnDate = $returnDate;
         $this->completed = $completed;
@@ -67,7 +66,7 @@ class Tasks
             $dbr['name'],
             $dbr['phone'],
             $dbr['fruit'],
-            $dbr['weight'],
+            $dbr['quantity'],
             $dbr['orderDate'],
             $dbr['returnDate'],
             $dbr['completed'],
@@ -107,9 +106,9 @@ class Tasks
             array_push($err, "Bitte valide Frucht auswählen!");
         }
 
-        $tempWeight = $_POST['weight'];
+        $tempWeight = $_POST['quantity'];
         if (isset($tempWeight) and trim($tempWeight) != "") {
-            $weight = trim($tempWeight);
+            $quantity = trim($tempWeight);
         } else {
             array_push($err, "Bitte validen Gewichtswert eingeben!");
         }
@@ -118,29 +117,29 @@ class Tasks
             $pdo = new PDO('mysql:host=localhost;dbname=ictkursm307', 'root');
             $currentDate = date("Y-m-d");
             
-            switch ($weight) {
+            switch ($quantity) {
                 case "0to5":
-                    $weight = "0kg-5kg";
+                    $quantity = "0kg-5kg";
                     $days = 5;
                     break;
                 case "5to10":
-                    $weight = "5-10kg";
+                    $quantity = "5-10kg";
                     $days = 8;
                     break;
                 case "10to15":
-                    $weight = "10kg-15kg";
+                    $quantity = "10kg-15kg";
                     $days = 12;
                     break;
                 default:
-                    $weight = "15-20kg";
+                    $quantity = "15-20kg";
                     $days = 18;
                     break;
             }
                 
-            // $Date = $currentDate;
-            // $endDate = date('Y-m-d', strtotime($Date. ' + 3 days'));
+            $Date = $currentDate;
+            $endDate = date('Y-m-d', strtotime($Date. " + $days days"));
 
-            $statement = $pdo->prepare("INSERT INTO auftrag (auftragDate, email, fk_fruitId, name, phone, returndate, quantity) VALUES ('$currentDate', \"$email\", $fruit, \"$name\", $phone, '2022-05-10', \"$weight\")");
+            $statement = $pdo->prepare("INSERT INTO auftrag (auftragDate, email, fk_fruitId, name, phone, returndate, quantity) VALUES ('$currentDate', \"$email\", $fruit, \"$name\", $phone, '$endDate', \"$quantity\")");
             $statement->execute();
 
             $message = "Erfolgreich abgesendet!";
@@ -163,7 +162,7 @@ class Tasks
      */
     public function update(): int
     {
-        // Dein Code...
+        
     }
 
     /**
