@@ -8,11 +8,16 @@ CREATE TABLE `auftrag` (
   `phone` varchar(50) NOT NULL,
   `email` varchar(80) NOT NULL,
   `auftragDate` date DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  `returndate` date NOT NULL,
-  `fk_fruitId` int(11) FOREIGN KEY REFERENCES fruit(id) NOT NULL,
+  `returnDate` date NOT NULL,
+  `fk_fruitId` int(11) NOT NULL,
+  `quantity` varchar(20),
   PRIMARY KEY(auftragId),
   CONSTRAINT fk_fruitId FOREIGN KEY (fk_fruitId) REFERENCES fruits(id)
 );
 
-INSERT INTO `auftrag` (`name`, `phone`, `email`, `returndate`, `fk_fruitId`) VALUES
-('Benny', '0797814214', 'jk@gmail.com', '04-04-2005', 1);
+INSERT INTO `auftrag` (auftragDate, email, fk_fruitId, name, phone, returndate, quantity)
+VALUES ('2022-05-10', "example@dejflef.com", 20, "Peter", 83219831831, '2022-05-20', "5kg-10kg"),
+('2022-05-10', "example@dejflef.com", 22, "Franz", 83219831831, '2022-05-20', "5kg-10kg"),
+('2022-05-10', "example@dejflef.com", 1, "Erika", 83219831831, '2022-05-20', "5kg-10kg"),
+('2022-05-10', "example@dejflef.com", 12, "Joachim", 83219831831, '2022-05-20', "5kg-10kg"),
+('2022-05-10', "example@dejflef.com", 4, "Kempfy", 83219831831, '2022-05-20', "5kg-10kg");
