@@ -11,6 +11,7 @@ CREATE TABLE `auftrag` (
   `returnDate` date NOT NULL,
   `fk_fruitId` int(11) NOT NULL,
   `quantity` varchar(20),
+  `completed` boolean DEFAULT false,
   PRIMARY KEY(auftragId),
   CONSTRAINT fk_fruitId FOREIGN KEY (fk_fruitId) REFERENCES fruits(id)
 );

@@ -1,7 +1,3 @@
-// Javascript
-// console.info('JS geladen.');
-
-
 $(document).ready(function(){
     if (document.URL.includes("create")) {
         var timeField = document.getElementById("time");
