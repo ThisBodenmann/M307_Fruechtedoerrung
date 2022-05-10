@@ -82,7 +82,7 @@
                 <br>
 
                 <label>Menge: </label>
-                <select name="weight" id="weight">
+                <select name="quantity" id="quantity">
                     <option value="0to5">'0-5 kg'</option>
                     <option value="5to10">'5-10 kg'</option>
                     <option value="10to15">'10-15 kg'</option>
@@ -92,7 +92,7 @@
                 <br>
 
                 <label for="time">Geschätzte Dörrungszeit: </label>
-                <input type="text" id="time" name="time" default="nice" readonly>
+                <input type="text" id="time" name="time" readonly>
                 <br>
                 <br>
                 
