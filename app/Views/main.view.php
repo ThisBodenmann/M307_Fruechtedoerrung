@@ -22,8 +22,13 @@
                 <th style="width:20%">Frucht</th>
                 <th style="width:10%">Menge</th>
             </tr>
+            <?php 
+                foreach ($tasks as $task) {
+                    $emoji = ($task->returnDate >= date("Y-m-d") ? '😁' : '😠');
+                }
+            ?>
             <tr>
-                <td>TEST</td>
+                <td><?= $task->name ?></td>
                 <td>TEST</td>
                 <td>TEST</td>
                 <td>TEST</td>

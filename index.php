@@ -8,7 +8,7 @@ $routes = [
 ];
 
 $db = [
-	'name'     => 'meinedatenbank',
+	'name'     => 'ictkursm307',
 	'username' => 'root',
 	'password' => '',
 ];

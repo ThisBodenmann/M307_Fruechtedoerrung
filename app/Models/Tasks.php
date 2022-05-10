@@ -1,28 +1,29 @@
 <?php
-/**
- * Das Model "Example" implementiert alle grundlegenden Funktionen einer Datenbank-
- * Anwendung: load (SELECT), save (INSERT oder UPDATE) und delete (DELETE).
- */
-class Example
+class Tasks
 {
-    public int $id = 0;
-    public string $name = '';
+    public $auftragId;
+    public $frucht;
+    public $name;
+    public $phone;
+    public $email;
+    public $menge;
+    public $auftragDate;
+    public $returnDate;
 
-    /**
-     * Der Konstruktor initialisiert alle Eigenschaften des Objekts
-     * Für neue Datensätze kann die $id auf 0 gesetzt werden.
-     */
-    public function __construct(int $id, string $name): ?self
+
+    public function __construct($frucht = null, $name = null, $phone = null, $email = null, $menge = null,$auftragDate = null,$returnDate = null)
     {
-        $this->id = $id;
+        $this->frucht = $frucht;
         $this->name = $name;
+        $this->phone = $phone;
+        $this->email = $email;
+        $this->menge = $menge;
+        $this->auftragDate = $auftragDate;
+        $this->returnDate = $returnDate;
 
         return $this;
     }
 
-    /**
-     * Datensatz mit gegebener ID von der Datenbank ins Objekt laden
-     */
     public function find(int $id): ?self
     {
         $statement = db()->prepare('SELECT * FROM example WHERE id = :id LIMIT 1');
@@ -45,11 +46,30 @@ class Example
     /**
      * Alle Datensätze aus der Datenbank laden.
      */
-    public function getAll()
+    public static function getAll()
     {
-        // Dein Code ...
+        $statement = connectToDatabase()->prepare('select * from auftrag');
+        $statement->execute();
+        $results = $statement->fetchAll();
+        $tasks = [];
+        foreach ($results as $task) {
+            $tasks[] = Tasks::ResultToTask($task);
+        }
+        return $tasks;
     }
 
+    private static function ResultToTask($dbr)
+    {
+        return new Tasks(
+            $dbr['name'],
+            $dbr['email'],
+            $dbr['phone'],
+            $dbr['frucht'],
+            $dbr['menge'],
+            $dbr['auftragDate'],
+            $dbr['returnDate'],
+        );
+    }
     /**
      * Erstellt einen neuen Eintrag in der Datenbank.
      */
