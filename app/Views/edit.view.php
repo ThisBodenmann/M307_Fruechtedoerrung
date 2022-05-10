@@ -8,7 +8,7 @@
     <base href="<?= ROOT_URL ?>/">
     <link rel="stylesheet" href="public/css/app.css">
 </head>
-<body>
+<body onload="editOnLoad()" src="public/js/app.js">
     <div class="container">
     
         <h1>Auftrag anpassen</h1>
@@ -81,13 +81,8 @@
                 <br>
                 <br>
 
-                <label>Menge: </label>
-                <select name="weight">
-                    <option value="0to5">'0-5 kg'</option>
-                    <option value="5to10">'5-10 kg'</option>
-                    <option value="10to15">'10-15 kg'</option>
-                    <option value="15to20">'15-20 kg'</option>
-                </select>
+                <label for="quantity">Menge: </label>
+                <input name="quantity" id="quantity" readonly>
                 <br>
                 <br>
                 
@@ -99,11 +94,23 @@
 
                 <label for="creationDate">Erstellungsdatum: </label>
                 <input name="creationDate" id="creationDate" readonly>
+
+                <label for="status">Status: </label>
+                <input name="status" id="status" readonly>
                 <br>
                 <br>
 
                 <label for="time">Geschätzte Dörrungszeit: </label>
                 <input type="text" id="time" name="time" readonly>
+                <br>
+                <br>
+                
+                <label for="id">AuftragsNummer: </label>
+                <input type="text", id="id" name="id">
+                <br>
+                <br>
+
+                <input type="submit" name="submit" value="Submit"> 
             </fieldset>
 
         </form>
