@@ -88,16 +88,15 @@ class Tasks
             array_push($err, "Bitte validen Namen eingeben!");
         }
 
-        $word = "@";
         $tempEmail = $_POST['email'];
-        if (isset($tempEmail) and trim($tempEmail) != "" and trpos($$tempEmail, $word) !== false) {
+        if (isset($tempEmail) and trim($tempEmail) != "") {
             $email = trim($tempEmail);
         } else {
             array_push($err, "Bitte valide Email eingeben!");
         }
 
         $tempPhone = $_POST['phone'];
-        if (isset($tempPhone) and trim($tempPhone) != "") {
+        if (isset($tempPhone) and trim($tempPhone) != "" and is_numeric($tempPhone)) {
             $phone = trim($tempPhone);
         } else {
             array_push($err, "Bitte valide Telefonnummer eingeben!");
@@ -142,14 +141,15 @@ class Tasks
             $Date = $currentDate;
             $endDate = date('Y-m-d', strtotime($Date. " + $days days"));
 
-            $statement = connectToDatabase()->prepare("INSERT INTO auftrag (orderDate, email, fk_fruitId, name, phone, returndate, quantity) VALUES ('$currentDate', \"$email\", $fruit, \"$name\", $phone, '$endDate', \"$quantity\")");
+            $statement = connectToDatabase()->prepare("INSERT INTO auftrag (orderDate, email, fk_fruitId, name, phone, returndate, quantity) VALUES ('$currentDate', \"$email\", $fruit, \"$name\", \"$phone\", '$endDate', \"$quantity\")");
             $statement->execute();
 
             $message = "Erfolgreich abgesendet!";
             echo "<script type='text/javascript'>alert('$message');</script>";
 
+            header("Location: /m307_1/06_Doerrfruechte/main" );
             unset($_POST);
-            require 'app/Views/main.view.php';
+            
         } else {
             $message = "";
             foreach ($err as $error) {
@@ -201,7 +201,7 @@ class Tasks
         }
 
         $tempPhone = $_POST['phone'];
-        if (isset($tempPhone) and trim($tempPhone) != "") {
+        if (isset($tempPhone) and trim($tempPhone) != "" and is_numeric($tempPhone)) {
             $phone = trim($tempPhone);
         } else {
             array_push($err, "Bitte valide Telefonnummer eingeben!");
@@ -214,15 +214,11 @@ class Tasks
             array_push($err, "Bitte valide Frucht auswählen!");
         }
 
-        if (array_key_exists("completed", $_POST)) {
-            $completed = 1;
-        } else {
-            $completed = 0;
-        }
+        $completed = $_POST['completed'];
         $orderId = $_GET['taskId'];
 
         if (count($err) == 0) {
-            $statement = connectToDatabase()->prepare("UPDATE auftrag SET name=$name, email=$email, phone=$phone, fk_fruitId=$fruit, completed= '' WHERE orderId=$orderId");
+            $statement = connectToDatabase()->prepare("UPDATE auftrag SET name='$name', email='$email', phone='$phone', fk_fruitId=$fruit, completed=$completed WHERE orderId=$orderId");
             $statement->execute();
 
             $message = "Erfolgreich geändert!";
@@ -249,7 +245,6 @@ class Tasks
         $taskId = $_GET['taskId'];
         $statement = connectToDatabase()->prepare("Delete FROM auftrag WHERE orderId=$taskId");
         $statement->execute();
-        header("Location: /M307_Fruechtedoerrung/main" );
-        require 'app/Views/main.view.php';
+        header("Location: /m307_1/06_Doerrfruechte/main" );
     }
 }

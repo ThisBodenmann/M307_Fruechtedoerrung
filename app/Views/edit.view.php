@@ -96,7 +96,10 @@
                 <input name="creationDate" id="creationDate" value="<?php echo $orderDate ?>" readonly>
 
                 <label for="completed">Status: </label>
-                <input type="checkbox" name="completed" id="completed">
+                <select name="completed" id="completed">
+                    <option value="false" selected>Offen</option>
+                    <option value="true">Abgeschlossen</option>
+                </select>
                 <br>
                 <br>
 
