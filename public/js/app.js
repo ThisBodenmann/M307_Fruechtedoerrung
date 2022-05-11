@@ -14,13 +14,4 @@ $(document).ready(function(){
             }
         });
     }
-    if (document.URL.includes("main")) {
-        /*$('#btnEdit').on('click', function () {
-            
-        });*/
-        function high(id)
-        {
-            alert(id);
-        } 
-    }  
 });

@@ -8,8 +8,8 @@
     <script src="public/js/app.js"></script>
 </head>
 <body>
-        <h1 class="title">Fruchte-Dörrung</h1>
-        <button class="btnCreate" type="button" onclick="window.location.href='/M307_Fruechtedoerrung/create'">Neuen Auftrag erstellen</button>
+        <button class="btnCreate" type="button" onclick="window.location.href='http://web.kurse.ict-bz.ch/m307_1/06_Doerrfruechte/create'">Neuen Auftrag erstellen</button>
+
         <table class="styled-table">
             <thead>
                 <tr>
@@ -37,9 +37,8 @@
 
                             <td>
                                 <a href="edit?taskId=<?= $task->orderId ?>">
-                                    <button id="btnEdit" type="button">
-                                        <!-- <img class="editbtn" id="editImg" src="public/icons/edit.png" alt="Edit"> -->
-                                        <button type="submit" name="submit" id="editbtn" onClick="high('<?php echo $i;?>')" source="app/js/app.js"></button>
+                                    <button type="submit" name="submit" id="editbtn">
+                                        <img class="editbtn" id="editImg" src="public/icons/edit.png" alt="Edit">
                                     </button>
                                 </a>
                             </td>

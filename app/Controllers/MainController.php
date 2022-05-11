@@ -6,7 +6,6 @@ class MainController
 	{
 		$tasks = Tasks::getAll();
 		require 'app/Views/main.view.php';
-
 	}
 
 }
