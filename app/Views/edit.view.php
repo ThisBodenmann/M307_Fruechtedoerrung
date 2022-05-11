@@ -13,7 +13,7 @@
     
         <h1>Auftrag anpassen</h1>
 
-        <form>
+        <form method="post">
 
             <fieldset>
 

@@ -186,4 +186,9 @@ class Tasks
 
         return 0;
     }
+
+    public function editOnLoad() {
+        $message = "Loaded";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+    }
 }
