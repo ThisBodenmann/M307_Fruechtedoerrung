@@ -9,7 +9,7 @@
 </head>
 <body>
 
-        <button class="btnCreate" type="button" onclick="window.location.href='/M307_Fruechtedoerrung/create'">Neuen Auftrag erstellen</button>
+        <button class="btnCreate" type="button" onclick="window.location.href='http://web.kurse.ict-bz.ch/m307_1/06_Doerrfruechte/create'">Neuen Auftrag erstellen</button>
         <table class="styled-table">
             <thead>
                 <tr>

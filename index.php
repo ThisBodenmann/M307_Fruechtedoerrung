@@ -8,9 +8,9 @@ $routes = [
 ];
 
 $db = [
-	'name'     => 'ictkursm307',
-	'username' => 'root',
-	'password' => '',
+	'name'     => 'kurseictbz_30706',
+	'username' => 'kurseictbz_30706',
+	'password' => 'db_307_pw_06',
 ];
 
 $router = new Router($routes);

@@ -114,7 +114,7 @@ class Tasks
         }
 
         if (count($err) == 0) {
-            $pdo = new PDO('mysql:host=localhost;dbname=ictkursm307', 'root');
+            $pdo = new PDO('mysql:host=localhost;dbname=kurseictbz_30706', 'kurseictbz_30706', 'db_307_pw_06');
             $currentDate = date("Y-m-d");
             
             switch ($quantity) {
@@ -139,13 +139,13 @@ class Tasks
             $Date = $currentDate;
             $endDate = date('Y-m-d', strtotime($Date. " + $days days"));
 
-            $statement = $pdo->prepare("INSERT INTO auftrag (auftragDate, email, fk_fruitId, name, phone, returndate, quantity) VALUES ('$currentDate', \"$email\", $fruit, \"$name\", $phone, '$endDate', \"$quantity\")");
+            $statement = $pdo->prepare("INSERT INTO auftrag (orderDate, email, fk_fruitId, name, phone, returndate, quantity) VALUES ('$currentDate', \"$email\", $fruit, \"$name\", $phone, '$endDate', \"$quantity\")");
             $statement->execute();
 
             $message = "Erfolgreich abgesendet!";
             echo "<script type='text/javascript'>alert('$message');</script>";
 
-            header("app/views/main.view.php");
+            echo "<script>window.location = 'http://web.kurse.ict-bz.ch/m307_1/06_Doerrfruechte/main'</script>";
             unset($_POST);
         } else {
             $message = "";
