@@ -1,4 +1,14 @@
-
+.title { 
+    color: #009879; 
+    font-family: 'Raleway',sans-serif; 
+    font-size: 62px; 
+    
+    font-weight: 800; 
+    line-height: 72px; 
+    margin: 0 0 24px; 
+    text-align: center; 
+    text-transform: uppercase; 
+}
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
