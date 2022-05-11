@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `ictkursm307` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `ictkursm307`;
+CREATE DATABASE IF NOT EXISTS `kurseictbz_30706` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `kurseictbz_30706`;
 
 DROP TABLE IF EXISTS `auftrag`;
 CREATE TABLE `auftrag` (
@@ -7,12 +7,12 @@ CREATE TABLE `auftrag` (
   `name` varchar(120) NOT NULL,
   `phone` varchar(50) NOT NULL,
   `email` varchar(80) NOT NULL,
-  `orderDate` date DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `orderDate` date NOT NULL,
   `returnDate` date NOT NULL,
   `fk_fruitId` int(11) NOT NULL,
   `quantity` varchar(20),
   `completed` boolean DEFAULT false,
-  PRIMARY KEY(auftragId),
+  PRIMARY KEY(orderId),
   CONSTRAINT fk_fruitId FOREIGN KEY (fk_fruitId) REFERENCES fruits(id)
 );
 
