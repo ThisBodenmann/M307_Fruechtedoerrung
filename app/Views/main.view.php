@@ -35,10 +35,9 @@
                             <td><?= $task->quantity ?></td>
                             <td><?= $task->fruit->name ?></td>
                             <td>
-                                <a href="edit?taskId=<?= $task->auftragId ?>">
-                                    <button id="btnEdit" type="button">
-                                        <!-- <img class="editbtn" id="editImg" src="public/icons/edit.png" alt="Edit"> -->
-                                        <button type="submit" name="submit" id="editbtn" onClick="high('<?php echo $i;?>')" source="app/js/app.js"></button>
+                                <a href="edit?taskId=<?= $task->orderId ?>">
+                                    <button type="submit" name="submit" id="editbtn">
+                                        <img class="editbtn" id="editImg" src="public/icons/edit.png" alt="Edit">
                                     </button>
                                 </a>
                             </td>

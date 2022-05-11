@@ -1,6 +1,7 @@
 <?php
 class Tasks
 {
+    public $orderId;
     public $name;
     public $phone;
     public $email;
@@ -11,8 +12,9 @@ class Tasks
     public $fruit;
 
 
-    public function __construct($name = null, $phone = null, $email = null, $quantity = null, $orderDate = null, $returnDate = null, $completed = null, $fruit = null)
+    public function __construct($orderId = null, $name = null, $phone = null, $email = null, $quantity = null, $orderDate = null, $returnDate = null, $completed = null, $fruit = null)
     {
+        $this->orderId = $orderId;
         $this->name = $name;
         $this->phone = $phone;
         $this->email = $email;
@@ -62,6 +64,7 @@ class Tasks
     private static function ResultToTask($dbr)
     {   
         return new Tasks(
+            $dbr['orderId'],
             $dbr['name'],
             $dbr['phone'],
             $dbr['email'],
@@ -160,7 +163,30 @@ class Tasks
     /**
      * Aktualisiert die aktuellen Daten in der Datenbank.
      */
-    public function update(): int
+    public function onLoad() 
+    {
+        $taskId = $_GET['taskId'];
+        $pdo = new PDO('mysql:host=localhost;dbname=kurseictbz_30706', 'kurseictbz_30706', 'db_307_pw_06');
+        $statement = $pdo->prepare("SELECT * FROM auftrag WHERE orderId=$taskId");
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+        var_dump($result);
+        
+        $orderId = $result[0]['orderId'];
+        $name = $result[0]['name'];
+        $phone = $result[0]['phone'];
+        $email = $result[0]['email'];
+        $orderDate = $result[0]['orderDate'];
+        $returnDate = $result[0]['returnDate'];
+        $fruit = $result[0]['fk_fruitId'];
+        $quantity = $result[0]['quantity'];
+        $completed = $result[0]['completed'];
+
+        require 'app/Views/edit.view.php';
+    }
+
+    public function update()
     {
         
     }
@@ -184,10 +210,5 @@ class Tasks
         }
 
         return 0;
-    }
-
-    public function editOnLoad() {
-        $message = "Loaded";
-        echo "<script type='text/javascript'>alert('$message');</script>";
     }
 }
