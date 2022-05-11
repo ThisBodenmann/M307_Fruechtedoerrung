@@ -51,7 +51,7 @@ class Tasks
      */
     public static function getAll()
     {
-        $statement = connectToDatabase()->prepare('select * from auftrag');
+        $statement = connectToDatabase()->prepare('select * from auftrag where completed = false');
         $statement->execute();
         $results = $statement->fetchAll();
         $tasks = [];
@@ -88,8 +88,9 @@ class Tasks
             array_push($err, "Bitte validen Namen eingeben!");
         }
 
+        $word = "@";
         $tempEmail = $_POST['email'];
-        if (isset($tempEmail) and trim($tempEmail) != "") {
+        if (isset($tempEmail) and trim($tempEmail) != "" and trpos($$tempEmail, $word) !== false) {
             $email = trim($tempEmail);
         } else {
             array_push($err, "Bitte valide Email eingeben!");
@@ -242,21 +243,13 @@ class Tasks
     /**
      * Lösche einen Datensatz, entweder mit der angegebenen $id oder falls nicht angegeben, der aktuell geladene.
      */
-    public function delete(int $id = 0): int
+    public static function delete()
     {
         // Falls keine $id angegeben ist, lösche den aktuell geladenen ($this->id) des Objektes.
-        if (!$id) {
-            $id = $this->id;
-        }
-
-        if ($id > 0) {
-            // Datensatz löschen (DELETE)
-            // Dein Code ...
-            
-            // Gib die Anzahl der gespeicherten Datensätze zurück (1 = Erfolg, 0 = Fehler)
-            // return $statement->rowCount();
-        }
-
-        return 0;
+        $taskId = $_GET['taskId'];
+        $statement = connectToDatabase()->prepare("Delete FROM auftrag WHERE orderId=$taskId");
+        $statement->execute();
+        header("Location: /M307_Fruechtedoerrung/main" );
+        require 'app/Views/main.view.php';
     }
 }

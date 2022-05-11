@@ -3,13 +3,13 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 <head>
     <meta charset="UTF-8">
-    <title>Meine Seite</title>
+    <title>Fruchte-Dörrung</title>
     <link rel="stylesheet" href="public/css/app.css">
     <script src="public/js/app.js"></script>
 </head>
 <body>
-
         <button class="btnCreate" type="button" onclick="window.location.href='http://web.kurse.ict-bz.ch/m307_1/06_Doerrfruechte/create'">Neuen Auftrag erstellen</button>
+
         <table class="styled-table">
             <thead>
                 <tr>
@@ -25,15 +25,16 @@
             </thead>
             <tbody>
                 <?php foreach ($tasks as $task) {
-                        $completed = ($task->completed = 0 ? '✅' : '❌');
+                        $state = ($task->returnDate < date("Y-m-d") ? '🥔' : '🍎');
                     ?>
                         <tr>
-                            <td><?= $completed ?></td>
+                            <td><?= $state ?></td>
                             <td><?= $task->returnDate ?></td>
                             <td><?= $task->name ?></td>
                             <td><?= $task->email ?></td>
                             <td><?= $task->quantity ?></td>
                             <td><?= $task->fruit->name ?></td>
+
                             <td>
                                 <a href="edit?taskId=<?= $task->orderId ?>">
                                     <button type="submit" name="submit" id="editbtn">
@@ -42,7 +43,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="delete?taskId=<?= $task->auftragId ?>">
+                                <a href="delete?taskId=<?= $task->orderId ?>">
                                     <button id="btnDelete" type="button">
                                         <img class="btnDelete" id="deleteImg" src="public/icons/delete.png" alt="Delete">
                                     </button>
