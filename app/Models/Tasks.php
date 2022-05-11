@@ -117,7 +117,6 @@ class Tasks
         }
 
         if (count($err) == 0) {
-            $pdo = new PDO('mysql:host=localhost;dbname=kurseictbz_30706', 'kurseictbz_30706', 'db_307_pw_06');
             $currentDate = date("Y-m-d");
             
             switch ($quantity) {
@@ -142,14 +141,14 @@ class Tasks
             $Date = $currentDate;
             $endDate = date('Y-m-d', strtotime($Date. " + $days days"));
 
-            $statement = $pdo->prepare("INSERT INTO auftrag (orderDate, email, fk_fruitId, name, phone, returndate, quantity) VALUES ('$currentDate', \"$email\", $fruit, \"$name\", $phone, '$endDate', \"$quantity\")");
+            $statement = connectToDatabase()->prepare("INSERT INTO auftrag (orderDate, email, fk_fruitId, name, phone, returndate, quantity) VALUES ('$currentDate', \"$email\", $fruit, \"$name\", $phone, '$endDate', \"$quantity\")");
             $statement->execute();
 
             $message = "Erfolgreich abgesendet!";
             echo "<script type='text/javascript'>alert('$message');</script>";
 
-            echo "<script>window.location = 'http://web.kurse.ict-bz.ch/m307_1/06_Doerrfruechte/main'</script>";
             unset($_POST);
+            require 'app/Views/main.view.php';
         } else {
             $message = "";
             foreach ($err as $error) {
@@ -166,12 +165,10 @@ class Tasks
     public function onLoad() 
     {
         $taskId = $_GET['taskId'];
-        $pdo = new PDO('mysql:host=localhost;dbname=kurseictbz_30706', 'kurseictbz_30706', 'db_307_pw_06');
-        $statement = $pdo->prepare("SELECT * FROM auftrag WHERE orderId=$taskId");
+        $statement = connectToDatabase()->prepare("SELECT * FROM auftrag WHERE orderId=$taskId");
         $statement->execute();
 
         $result = $statement->fetchAll();
-        var_dump($result);
         
         $orderId = $result[0]['orderId'];
         $name = $result[0]['name'];
@@ -181,14 +178,65 @@ class Tasks
         $returnDate = $result[0]['returnDate'];
         $fruit = $result[0]['fk_fruitId'];
         $quantity = $result[0]['quantity'];
-        $completed = $result[0]['completed'];
 
         require 'app/Views/edit.view.php';
     }
 
     public function update()
     {
-        
+        $err = [];
+        $tempName = $_POST['name'];
+        if(isset($tempName) and trim($tempName) != "") {
+            $name = trim($tempName);
+        } else {
+            array_push($err, "Bitte validen Namen eingeben!");
+        }
+
+        $tempEmail = $_POST['email'];
+        if (isset($tempEmail) and trim($tempEmail) != "") {
+            $email = trim($tempEmail);
+        } else {
+            array_push($err, "Bitte valide Email eingeben!");
+        }
+
+        $tempPhone = $_POST['phone'];
+        if (isset($tempPhone) and trim($tempPhone) != "") {
+            $phone = trim($tempPhone);
+        } else {
+            array_push($err, "Bitte valide Telefonnummer eingeben!");
+        }
+
+        $tempFruits = $_POST['fruits'];
+        if (isset($tempFruits) and trim($tempFruits) != "") {
+            $fruit = trim($tempFruits);
+        } else {
+            array_push($err, "Bitte valide Frucht auswählen!");
+        }
+
+        if (array_key_exists("completed", $_POST)) {
+            $completed = 1;
+        } else {
+            $completed = 0;
+        }
+        $orderId = $_GET['taskId'];
+
+        if (count($err) == 0) {
+            $statement = connectToDatabase()->prepare("UPDATE auftrag SET name=$name, email=$email, phone=$phone, fk_fruitId=$fruit, completed= '' WHERE orderId=$orderId");
+            $statement->execute();
+
+            $message = "Erfolgreich geändert!";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+
+            echo "<script>window.location = 'http://web.kurse.ict-bz.ch/m307_1/06_Doerrfruechte/main'</script>";
+            unset($_POST);
+        } else {
+            $message = "";
+            foreach ($err as $error) {
+                $message = $message . '\r\n' . $error;
+            }
+
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        }
     }
 
     /**
